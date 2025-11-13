@@ -1,0 +1,591 @@
+/* === FORTNITE INSPIRED THEME === */
+/* Cores e variáveis do tema Fortnite */
+:root {
+  --fortnite-purple: #7b5cff;
+  --fortnite-blue: #00d9ff;
+  --fortnite-yellow: #ffeb3b;
+  --fortnite-dark: #0a0e27;
+  --fortnite-dark-secondary: #1a1f3a;
+  --fortnite-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --fortnite-gold: #ffc107;
+  --fortnite-rare: #0dcaf0;
+  --fortnite-epic: #a855f7;
+}
+
+main {
+  padding-bottom: 8rem !important;
+}
+
+/* === RESET E BASE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Burbank Big Condensed', 'Arial Black', sans-serif;
+  background: var(--fortnite-dark);
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(123, 92, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.imgFortnite {
+  position: relative;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.imgFortnite::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.alphacoders.com/132/thumb-1920-1326064.jpeg');
+  background-size: cover;
+  background-position: top;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.imgFortnite>* {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* === NAVBAR FORTNITE STYLE === */
+.navbar {
+  background: rgba(10, 14, 39, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 3px solid var(--fortnite-blue);
+  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+  padding: 1rem 0;
+}
+
+.navbar-brand {
+  font-size: 2rem !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ffffff !important;
+  text-shadow:
+    0 0 10px var(--fortnite-blue),
+    0 0 20px var(--fortnite-blue),
+    2px 2px 0 var(--fortnite-purple);
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05) rotate(-2deg);
+  text-shadow:
+    0 0 20px var(--fortnite-blue),
+    0 0 40px var(--fortnite-blue),
+    3px 3px 0 var(--fortnite-purple);
+}
+
+.navbar-brand img {
+  filter: drop-shadow(0 0 10px var(--fortnite-blue));
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover img {
+  filter: drop-shadow(0 0 20px var(--fortnite-blue));
+  transform: scale(1.1);
+}
+
+.nav-link {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 1px;
+  padding: 0.5rem 1.5rem !important;
+  margin: 0 0.25rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
+.nav-link:hover {
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 217, 255, 0.4);
+}
+
+/* === BOTÃO FORTNITE STYLE === */
+.btn {
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  color: #ffffff;
+  box-shadow: 0 5px 20px rgba(123, 92, 255, 0.5);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(123, 92, 255, 0.7);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  box-shadow: 0 5px 20px rgba(56, 239, 125, 0.5);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, var(--fortnite-yellow), var(--fortnite-gold));
+  color: var(--fortnite-dark);
+  box-shadow: 0 5px 20px rgba(255, 193, 7, 0.5);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #eb3349, #f45c43);
+  box-shadow: 0 5px 20px rgba(235, 51, 73, 0.5);
+}
+
+.btn-link.nav-link {
+  background: transparent;
+  border: 2px solid var(--fortnite-blue);
+}
+
+.btn-link.nav-link:hover {
+  background: var(--fortnite-blue);
+  color: var(--fortnite-dark) !important;
+}
+
+/* === CONTAINER === */
+.container {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* === CARDS DE COSMÉTICOS === */
+.cosmetic-card {
+  background: var(--fortnite-dark-secondary);
+  border: 3px solid transparent;
+  border-radius: 0;
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+  transition: all 0.3s ease;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.cosmetic-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  border-radius: 0;
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.cosmetic-card:hover::before {
+  opacity: 1;
+}
+
+.cosmetic-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 10px 40px rgba(0, 217, 255, 0.5);
+  border-color: var(--fortnite-blue);
+}
+
+.cosmetic-card-small {
+  background: var(--fortnite-dark-secondary);
+  border: 2px solid rgba(0, 217, 255, 0.3);
+  border-radius: 0;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.cosmetic-image {
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 3px solid var(--fortnite-blue);
+  filter: brightness(1.1) contrast(1.1);
+  transition: all 0.3s ease;
+}
+
+.cosmetic-card:hover .cosmetic-image {
+  filter: brightness(1.3) contrast(1.2);
+  transform: scale(1.1);
+}
+
+.cosmetic-image-small {
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-body {
+  background: rgba(26, 31, 58, 0.8);
+}
+
+.card-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* === RARIDADES FORTNITE === */
+.rarity-common {
+  border-left: 5px solid #6c757d;
+  border-top: 3px solid #6c757d;
+  box-shadow: 0 0 20px rgba(108, 117, 125, 0.3);
+}
+
+.rarity-uncommon {
+  border-left: 5px solid #198754;
+  border-top: 3px solid #198754;
+  box-shadow: 0 0 20px rgba(25, 135, 84, 0.5);
+}
+
+.rarity-rare {
+  border-left: 5px solid var(--fortnite-blue);
+  border-top: 3px solid var(--fortnite-blue);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.7);
+}
+
+.rarity-epic {
+  border-left: 5px solid var(--fortnite-purple);
+  border-top: 3px solid var(--fortnite-purple);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.7);
+}
+
+.rarity-legendary {
+  border-left: 5px solid var(--fortnite-gold);
+  border-top: 3px solid var(--fortnite-gold);
+  box-shadow: 0 0 30px rgba(255, 193, 7, 0.8);
+}
+
+.rarity-mythic {
+  border-left: 5px solid #e74c3c;
+  border-top: 3px solid #e74c3c;
+  box-shadow: 0 0 30px rgba(231, 76, 60, 0.8);
+}
+
+.rarity-exotic {
+  border-left: 5px solid #00ffff;
+  border-top: 3px solid #00ffff;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+}
+
+/* === BADGES === */
+.vbucks-badge {
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  font-weight: 900;
+  font-size: 1.5rem;
+  box-shadow: 0 5px 20px rgba(123, 92, 255, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.badge {
+  font-weight: 900;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === FORMULÁRIOS === */
+.form-control,
+.form-select {
+  background: var(--fortnite-dark-secondary);
+  border: 2px solid rgba(0, 217, 255, 0.3);
+  border-radius: 0;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: var(--fortnite-dark-secondary);
+  border-color: var(--fortnite-blue);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  color: #ffffff;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-label {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--fortnite-blue);
+}
+
+/* === ALERTS === */
+.alert {
+  border-radius: 0;
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+  border: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: white;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #eb3349, #f45c43);
+  color: white;
+}
+
+.alert-warning {
+  background: linear-gradient(135deg, var(--fortnite-yellow), var(--fortnite-gold));
+  color: var(--fortnite-dark);
+}
+
+.alert-info {
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  color: white;
+}
+
+/* === PAGINAÇÃO === */
+.pagination {
+  margin-top: 2rem;
+  gap: 0.5rem;
+}
+
+.page-link {
+  background: var(--fortnite-dark-secondary);
+  border: 2px solid rgba(0, 217, 255, 0.3);
+  color: var(--fortnite-blue);
+  font-weight: 900;
+  border-radius: 0;
+  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+  padding: 0.75rem 1.25rem;
+}
+
+.page-link:hover {
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  border-color: var(--fortnite-blue);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 217, 255, 0.5);
+}
+
+.page-item.active .page-link {
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  border-color: var(--fortnite-blue);
+  box-shadow: 0 5px 15px rgba(0, 217, 255, 0.7);
+}
+
+/* === TABELAS === */
+.table {
+  background: var(--fortnite-dark-secondary);
+  color: #ffffff;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.table thead {
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+}
+
+.table-hover tbody tr:hover {
+  background: rgba(0, 217, 255, 0.1);
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+/* === FOOTER === */
+footer {
+  background: rgba(10, 14, 39, 0.95);
+  border-top: 3px solid var(--fortnite-blue);
+  padding: 2rem 0;
+  margin-top: 3rem;
+  box-shadow: 0 -5px 20px rgba(0, 217, 255, 0.3);
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  color: var(--fortnite-blue);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--fortnite-purple);
+  text-shadow: 0 0 10px var(--fortnite-purple);
+}
+
+/* === ANIMAÇÕES === */
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(0, 217, 255, 0.8);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.glow-effect {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* === HERO SECTION === */
+.hero-section {
+  padding: 4rem 2rem;
+  border-radius: 0;
+  clip-path: polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px);
+  border: 3px solid var(--fortnite-blue);
+  margin-bottom: 3rem;
+  box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3);
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue), var(--fortnite-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--fortnite-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--fortnite-purple), var(--fortnite-blue));
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--fortnite-blue), var(--fortnite-purple));
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem !important;
+  }
+
+  .nav-link {
+    font-size: 1rem !important;
+  }
+
+  .cosmetic-image {
+    height: 180px;
+  }
+}
+
+/* === TEXT UTILITIES === */
+.text-muted {
+  color: #ffffff !important;
+  opacity: 0.8;
+}
+
+.text-muted-2 {
+  color: #000000 !important;
+  opacity: 0.8;
+}

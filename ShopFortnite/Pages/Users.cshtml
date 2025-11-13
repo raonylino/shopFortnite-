@@ -1,0 +1,95 @@
+@page
+@model UsersModel
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">
+        <i class="bi bi-people"></i> Todos os Usuários
+    </h1>
+
+    @if (Model.Users != null && Model.Users.Any())
+    {
+        <div class="row">
+            @foreach (var user in Model.Users)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <i class="bi bi-person-circle"></i> @user.Email
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h6 class="text-muted">Saldo</h6>
+                                <h4 class="text-success">
+                                    <i class="bi bi-wallet2"></i> @user.Vbucks V-Bucks
+                                </h4>
+                            </div>
+
+                            @if (user.Cosmetics != null && user.Cosmetics.Any())
+                            {
+                                <hr />
+                                <h6 class="text-muted mb-3">
+                                    <i class="bi bi-bag-check"></i> Cosméticos Adquiridos (@user.Cosmetics.Count())
+                                </h6>
+
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th class="text-end">Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var uc in user.Cosmetics.Take(10))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <span class="badge bg-secondary me-1">@uc.Cosmetic.Type</span>
+                                                        @uc.Cosmetic.Name
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <strong class="text-warning">@uc.PriceAtPurchase</strong>
+                                                        <small class="text-muted-2">V-Bucks</small>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                @if (user.Cosmetics.Count() > 10)
+                                {
+                                    <p class="text-muted small mt-2 mb-0 text-center">
+                                        +@(user.Cosmetics.Count() - 10) outros cosméticos
+                                    </p>
+                                }
+                            }
+                            else
+                            {
+                                <hr />
+                                <p class="text-muted text-center mb-0">
+                                    <i class="bi bi-bag-x"></i><br />
+                                    <small>Nenhum cosmético adquirido</small>
+                                </p>
+                            }
+                        </div>
+                        <div class="card-footer text-muted small">
+                            <i class="bi bi-calendar"></i> Cadastrado em: @user.CreatedAt.ToString("dd/MM/yyyy")
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> Nenhum usuário cadastrado no sistema.
+        </div>
+    }
+</div>

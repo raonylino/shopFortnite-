@@ -1,0 +1,191 @@
+@page
+@model ProfileModel
+@{
+    ViewData["Title"] = "Meu Perfil";
+}
+
+<div class="container mt-4">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model.IsAuthenticated)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-person-circle"></i> Perfil</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <i class="bi bi-person-circle text-primary" style="font-size: 5rem;"></i>
+                        <h4 class="mt-3">@Model.UserEmail</h4>
+                        <p class="text-muted">ID: @Model.UserId</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="bi bi-wallet2"></i> Saldo</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="display-4 text-success">@Model.Vbucks</h2>
+                        <p class="text-muted">V-Bucks</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <!-- Cosméticos Adquiridos -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-bag-check"></i> Meus Cosméticos (@Model.OwnedCosmetics.Count)</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.OwnedCosmetics.Any())
+                        {
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                                @foreach (var uc in Model.OwnedCosmetics)
+                                {
+                                    <div class="col">
+                                        <div class="card cosmetic-card-small rarity-@uc.Cosmetic.Rarity.ToLower()">
+                                            @if (!string.IsNullOrEmpty(uc.Cosmetic.ImageUrl))
+                                            {
+                                                <img src="@uc.Cosmetic.ImageUrl" class="card-img-top cosmetic-image-small" alt="@uc.Cosmetic.Name" />
+                                            }
+                                            <div class="card-body p-2">
+                                                <h6 class="card-title mb-1">@uc.Cosmetic.Name</h6>
+                                                <p class="card-text small text-muted mb-1">
+                                                    <span class="badge bg-secondary">@uc.Cosmetic.Type</span>
+                                                </p>
+                                                <small class="text-muted d-block mb-2">
+                                                    <i class="bi bi-calendar"></i> @uc.PurchasedAt.ToString("dd/MM/yyyy")
+                                                </small>
+                                                <div class="d-grid gap-1">
+                                                    <a href="/Cosmetics/Details/@uc.Cosmetic.Id" class="btn btn-sm btn-outline-primary">
+                                                        <i class="bi bi-eye"></i> Detalhes
+                                                    </a>
+                                                    <form method="post" asp-page-handler="Return" asp-route-cosmeticId="@uc.Cosmetic.Id" class="m-0">
+                                                        <button type="submit" class="btn btn-sm btn-warning w-100">
+                                                            <i class="bi bi-arrow-counterclockwise"></i> Devolver (+@uc.Cosmetic.Price)
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted text-center py-4">
+                                <i class="bi bi-bag-x" style="font-size: 3rem;"></i><br />
+                                Você ainda não possui cosméticos.<br />
+                                <a href="/Cosmetics" class="btn btn-primary mt-2">Explorar Loja</a>
+                            </p>
+                        }
+                    </div>
+                </div>
+
+                <!-- Histórico de Transações -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-clock-history"></i> Histórico de Transações</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Transactions.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Tipo</th>
+                                            <th>Cosmético</th>
+                                            <th>Valor</th>
+                                            <th>Saldo Após</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var transaction in Model.Transactions.OrderByDescending(t => t.CreatedAt).Take(20))
+                                        {
+                                            <tr>
+                                                <td>@transaction.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                                                <td>
+                                                    @if (transaction.Type == ShopFortnite.Domain.Entities.TransactionType.Purchase)
+                                                    {
+                                                        <span class="badge bg-danger">
+                                                            <i class="bi bi-cart"></i> Compra
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-warning">
+                                                            <i class="bi bi-arrow-counterclockwise"></i> Devolução
+                                                        </span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a href="/Cosmetics/Details/@transaction.CosmeticId">
+                                                        @transaction.CosmeticName
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @if (transaction.Type == ShopFortnite.Domain.Entities.TransactionType.Purchase)
+                                                    {
+                                                        <span class="text-danger">-@transaction.Amount</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-success">+@transaction.Amount</span>
+                                                    }
+                                                </td>
+                                                <td>@transaction.BalanceAfter</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            @if (Model.Transactions.Count > 20)
+                            {
+                                <p class="text-muted text-center mt-2">
+                                    Mostrando as últimas 20 transações de @Model.Transactions.Count total
+                                </p>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted text-center py-4">
+                                <i class="bi bi-receipt" style="font-size: 3rem;"></i><br />
+                                Nenhuma transação realizada ainda.
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">
+            <i class="bi bi-exclamation-triangle" style="font-size: 3rem;"></i>
+            <h4 class="mt-3">Acesso Restrito</h4>
+            <p>Você precisa estar autenticado para acessar seu perfil.</p>
+            <a href="/Account/Login?returnUrl=/Profile" class="btn btn-primary">Fazer Login</a>
+        </div>
+    }
+</div>

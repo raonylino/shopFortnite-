@@ -1,0 +1,65 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">
+                        <i class="bi bi-person-plus"></i> Criar Conta
+                    </h2>
+
+                    <div class="alert alert-info">
+                        <i class="bi bi-gift"></i>
+                        <strong>Bônus de Boas-Vindas:</strong> 10.000 V-Bucks grátis!
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle"></i> @Model.ErrorMessage
+                        </div>
+                    }
+
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nome</label>
+                            <input asp-for="Name" class="form-control" placeholder="Seu nome completo" required />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" placeholder="seu@email.com" required />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Senha</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6" />
+                            <small class="text-muted">A senha deve ter pelo menos 6 caracteres</small>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="ConfirmPassword" class="form-label">Confirmar Senha</label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="••••••••" required />
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-person-plus"></i> Criar Conta
+                            </button>
+                        </div>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="text-muted mb-0">Já tem uma conta?</p>
+                        <a href="/Account/Login" class="btn btn-outline-secondary mt-2">
+                            <i class="bi bi-box-arrow-in-right"></i> Entrar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

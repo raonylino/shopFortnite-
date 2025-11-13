@@ -1,0 +1,72 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5 ">
+    <div class="hero-section text-center imgFortnite">
+        <h1 class="hero-title mb-4">
+            <i class="bi bi-controller"></i> Loja de Itens
+        </h1>
+        <p class="lead mb-4" style="font-size: 1.5rem; font-weight: 700; color: #ffffff;">
+            🎮 GERENCIE SEUS COSMÉTICOS ÉPICOS 🎮
+        </p>
+
+        @if (Model.IsAuthenticated)
+        {
+            <div class="mb-4 p-3">
+                <i class="bi bi-check-circle"></i>
+                <strong style="font-size: 1.2rem;">BEM-VINDO, @Model.UserName!</strong>
+                <br />
+                <span class="vbucks-badge mt-3 d-inline-block">
+                    <i class="bi bi-currency-dollar"></i> @Model.Vbucks V-BUCKS
+                </span>
+            </div>
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                <a href="/Cosmetics" class="btn btn-primary btn-lg px-5">
+                    <i class="bi bi-bag-fill"></i> EXPLORAR LOJA
+                </a>
+                <a href="/Profile" class="btn btn-warning btn-lg px-5">
+                    <i class="bi bi-person-circle"></i> MEU PERFIL
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                <a href="/Account/Register" class="btn btn-primary btn-lg px-5">
+                    <i class="bi bi-person-plus-fill"></i> REGISTRAR ( GANHE 10.000 V-BUCKS!)
+                </a>
+                <a href="/Account/Login" class="btn btn-success btn-lg px-5">
+                    <i class="bi bi-box-arrow-in-right"></i> ENTRAR
+                </a>
+            </div>
+        }
+    </div>
+
+    <!-- Seção de Features -->
+    <div class="row mt-5 g-4">
+        <div class="col-md-4">
+            <div class="cosmetic-card text-center p-4 glow-effect">
+                <i class="bi bi-star-fill" style="font-size: 3rem; color: var(--fortnite-gold);"></i>
+                <h3 class="mt-3" style="text-transform: uppercase;">COSMÉTICOS RAROS</h3>
+                <p>Acesse milhares de skins, emotes e acessórios exclusivos!</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cosmetic-card text-center p-4 glow-effect">
+                <i class="bi bi-graph-up-arrow" style="font-size: 3rem; color: var(--fortnite-blue);"></i>
+                <h3 class="mt-3" style="text-transform: uppercase;">SISTEMA DE COMPRA</h3>
+                <p>Compre e devolva items com total controle de V-Bucks!</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cosmetic-card text-center p-4 glow-effect">
+                <i class="bi bi-lightning-charge-fill" style="font-size: 3rem; color: var(--fortnite-purple);"></i>
+                <h3 class="mt-3" style="text-transform: uppercase;">API REST</h3>
+                <p>Integre com nosso sistema via API ao seu APP!</p>
+            </div>
+        </div>
+    </div>
+</div>

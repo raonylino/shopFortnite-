@@ -1,0 +1,352 @@
+/* === LAYOUT GERAL === */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* === NAVBAR === */
+.navbar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #7c3aed !important;
+  transition: transform 0.2s;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.navbar-brand img {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: color 0.3s, transform 0.2s;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+.nav-link i {
+  margin-right: 5px;
+}
+
+/* === BOTÃO DE LOGOUT === */
+.btn-link.nav-link {
+  border: none;
+  background: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.btn-link.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+}
+
+/* === CARDS DE COSMÉTICOS === */
+.cosmetic-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cosmetic-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cosmetic-card-small {
+  transition: transform 0.2s ease;
+}
+
+.cosmetic-card-small:hover {
+  transform: scale(1.03);
+}
+
+.cosmetic-image {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 3px solid #f0f0f0;
+}
+
+.cosmetic-image-small {
+  height: 150px;
+  object-fit: cover;
+}
+
+/* === RARIDADE === */
+.rarity-common {
+  border-left: 4px solid #6c757d;
+  border-top: 2px solid #6c757d;
+}
+
+.rarity-uncommon {
+  border-left: 4px solid #198754;
+  border-top: 2px solid #198754;
+}
+
+.rarity-rare {
+  border-left: 4px solid #0dcaf0;
+  border-top: 2px solid #0dcaf0;
+}
+
+.rarity-epic {
+  border-left: 4px solid #a855f7;
+  border-top: 2px solid #a855f7;
+}
+
+.rarity-legendary {
+  border-left: 4px solid #ffc107;
+  border-top: 2px solid #ffc107;
+}
+
+.rarity-mythic {
+  border-left: 4px solid #e74c3c;
+  border-top: 2px solid #e74c3c;
+}
+
+.rarity-transcendent {
+  border-left: 4px solid #ff69b4;
+  border-top: 2px solid #ff69b4;
+}
+
+.rarity-exotic {
+  border-left: 4px solid #00ffff;
+  border-top: 2px solid #00ffff;
+}
+
+/* === BADGES === */
+.vbucks-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.4em 0.8em;
+}
+
+/* === BOTÕES === */
+.btn {
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  border: none;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+}
+
+/* === PAGINAÇÃO === */
+.pagination {
+  margin-top: 2rem;
+}
+
+.page-link {
+  color: #667eea;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.page-link:hover {
+  background-color: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.page-item.active .page-link {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+}
+
+/* === FORMULÁRIOS === */
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* === ALERTS === */
+.alert {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+  color: white;
+}
+
+.alert-warning {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.alert-info {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+/* === CONTAINERS === */
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* === FOOTER === */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+footer a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: #764ba2;
+}
+
+/* === TABELAS === */
+.table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(102, 126, 234, 0.1);
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+
+/* === ANIMAÇÕES === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .cosmetic-image {
+    height: 150px;
+  }
+
+  .navbar-brand img {
+    height: 30px !important;
+  }
+}
+
+/* === LOADING SPINNER === */
+.spinner-border {
+  color: #667eea;
+}
+
+/* === PROFILE CARDS === */
+.profile-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card .display-4 {
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* === TRANSAÇÕES === */
+.transaction-badge {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+}

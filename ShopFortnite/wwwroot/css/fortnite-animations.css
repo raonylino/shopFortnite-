@@ -1,0 +1,393 @@
+/* === ANIMAÇÕES E EFEITOS FORTNITE === */
+
+/* Partículas de fundo */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(123, 92, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(0, 217, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(255, 235, 59, 0.03) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: -1;
+  animation: particlesFloat 20s ease-in-out infinite;
+}
+
+@keyframes particlesFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+/* Texto com efeito neon */
+.neon-text {
+  color: #ffffff;
+  text-shadow:
+    0 0 5px var(--fortnite-blue),
+    0 0 10px var(--fortnite-blue),
+    0 0 20px var(--fortnite-blue),
+    0 0 40px var(--fortnite-purple);
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+
+
+/* Botões com efeito de onda */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Loading spinner estilo Fortnite */
+.fortnite-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(0, 217, 255, 0.3);
+  border-top: 5px solid var(--fortnite-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Efeito de scanner horizontal */
+@keyframes scanLine {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+.scan-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-effect::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--fortnite-blue), transparent);
+  animation: scanLine 2s ease-in-out infinite;
+}
+
+/* Badge com pulso */
+.badge-pulse {
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 5px 20px rgba(123, 92, 255, 0.5);
+  }
+
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(123, 92, 255, 0.8);
+  }
+}
+
+/* Efeito de digitação */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.typing-effect {
+  overflow: hidden;
+  border-right: 3px solid var(--fortnite-blue);
+  white-space: nowrap;
+  animation: typing 3s steps(40) 1s 1 normal both, blink 0.75s step-end infinite;
+}
+
+/* Hover lift com sombra */
+.lift-on-hover {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.lift-on-hover:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow:
+    0 15px 40px rgba(0, 217, 255, 0.4),
+    0 0 80px rgba(123, 92, 255, 0.3);
+}
+
+/* Parallax para backgrounds */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Glitch effect para texto */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch-text {
+  position: relative;
+  animation: glitch 0.5s ease-in-out infinite;
+}
+
+/* Hover glow para imagens */
+.img-glow {
+  transition: all 0.3s ease;
+}
+
+.img-glow:hover {
+  filter: brightness(1.3) drop-shadow(0 0 20px var(--fortnite-blue));
+}
+
+/* Grid de itens animado */
+.grid-item {
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.grid-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.grid-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.grid-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.grid-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.grid-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.grid-item:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading bar estilo Fortnite */
+.loading-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--fortnite-dark-secondary);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--fortnite-purple), var(--fortnite-blue), var(--fortnite-yellow));
+  animation: loadingSlide 2s ease-in-out infinite;
+}
+
+@keyframes loadingSlide {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* Tooltip estilo Fortnite */
+.fortnite-tooltip {
+  position: relative;
+}
+
+.fortnite-tooltip::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: var(--fortnite-dark-secondary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+  border: 2px solid var(--fortnite-blue);
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  opacity: 0;
+  z-index: 1000;
+}
+
+.fortnite-tooltip:hover::before {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+
+/* Victory royale effect */
+@keyframes victoryRoyale {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.victory-animation {
+  animation: victoryRoyale 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Rarity shimmer effect */
+@keyframes rarityShimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.rarity-shimmer {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%);
+  background-size: 1000px 100%;
+  animation: rarityShimmer 3s infinite;
+}
+
+/* Efeito de raio */
+.lightning-effect {
+  position: relative;
+}
+
+.lightning-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(0, 217, 255, 0.8) 50%, transparent 60%);
+  opacity: 0;
+  animation: lightning 4s infinite;
+}
+
+@keyframes lightning {
+
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+  }
+
+  92%,
+  94%,
+  96% {
+    opacity: 1;
+  }
+}

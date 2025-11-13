@@ -1,0 +1,120 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Cosmetic Cards */
+.cosmetic-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+}
+
+.cosmetic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cosmetic-image {
+  height: 200px;
+  object-fit: cover;
+  background-color: #f8f9fa;
+}
+
+.cosmetic-detail-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.cosmetic-card-small .cosmetic-image-small {
+  height: 120px;
+  object-fit: cover;
+}
+
+/* Rarity Colors */
+.rarity-common {
+  border: 3px solid #b0b0b0;
+}
+
+.rarity-uncommon {
+  border: 3px solid #5cb85c;
+}
+
+.rarity-rare {
+  border: 3px solid #5bc0de;
+}
+
+.rarity-epic {
+  border: 3px solid #9b59b6;
+}
+
+.rarity-legendary {
+  border: 3px solid #f39c12;
+}
+
+/* Cosmetics Grid for Users Page */
+.cosmetics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.cosmetic-mini {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid #ddd;
+}
+
+.cosmetic-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cosmetic-mini-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  color: #adb5bd;
+}
+
+/* Auth Forms */
+.auth-container {
+  max-width: 450px;
+  margin: 50px auto;
+}
+
+/* Utilities */
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

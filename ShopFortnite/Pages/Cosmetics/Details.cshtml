@@ -1,0 +1,146 @@
+@page "{id}"
+@model CosmeticDetailsModel
+@{
+    ViewData["Title"] = Model.Cosmetic?.Name ?? "Detalhes";
+}
+
+<div class="container mt-4">
+    @if (Model.Cosmetic != null)
+    {
+        <div class="row">
+            <div class="col-md-5">
+                @if (!string.IsNullOrEmpty(Model.Cosmetic.ImageUrl))
+                {
+                    <img src="@Model.Cosmetic.ImageUrl" class="img-fluid rounded cosmetic-detail-image rarity-@Model.Cosmetic.Rarity.ToLower()" alt="@Model.Cosmetic.Name" />
+                }
+                else
+                {
+                    <div class="cosmetic-detail-image rarity-@Model.Cosmetic.Rarity.ToLower() bg-secondary d-flex align-items-center justify-content-center rounded">
+                        <i class="bi bi-image text-white" style="font-size: 6rem;"></i>
+                    </div>
+                }
+            </div>
+
+            <div class="col-md-7">
+                <div class="mb-3">
+                    <a href="/Cosmetics" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </a>
+                </div>
+
+                <h1 class="display-5">@Model.Cosmetic.Name</h1>
+
+                <div class="mb-3">
+                    <span class="badge bg-secondary fs-6 me-2">@Model.Cosmetic.Type</span>
+                    <span class="badge bg-info fs-6 me-2">@Model.Cosmetic.Rarity</span>
+                    @if (Model.Cosmetic.IsNew)
+                    {
+                        <span class="badge bg-success fs-6"><i class="bi bi-star"></i> Novo</span>
+                    }
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Cosmetic.Description))
+                {
+                    <p class="lead text-muted">@Model.Cosmetic.Description</p>
+                }
+
+                <hr />
+
+                <div class="mb-4">
+                    @if (Model.Cosmetic.IsForSale)
+                    {
+                        <h3 class="text-primary">
+                            <i class="bi bi-currency-dollar"></i> @Model.Cosmetic.Price V-Bucks
+                        </h3>
+                    }
+                    else
+                    {
+                        <h5 class="text-muted">Atualmente indisponível para compra</h5>
+                    }
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <i class="bi bi-exclamation-triangle"></i> @Model.ErrorMessage
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                {
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <i class="bi bi-check-circle"></i> @Model.SuccessMessage
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                @if (Model.IsAuthenticated)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Seu saldo atual</h6>
+                            <h4 class="text-muted mb-0">
+                                <i class="bi bi-wallet2"></i> @Model.UserVbucks V-Bucks
+                            </h4>
+                        </div>
+                    </div>
+
+                    @if (Model.IsOwned)
+                    {
+                        <div class="alert alert-info mb-3">
+                            <i class="bi bi-check-circle-fill"></i> Você já possui este cosmético!
+                        </div>
+
+                        <form method="post" asp-page-handler="Return">
+                            <input type="hidden" name="cosmeticId" value="@Model.Cosmetic.Id" />
+                            <button type="submit" class="btn btn-warning btn-lg w-100">
+                                <i class="bi bi-arrow-counterclockwise"></i> Devolver (Reembolso: @Model.RefundAmount V-Bucks)
+                            </button>
+                        </form>
+                    }
+                    else if (Model.Cosmetic.IsForSale)
+                    {
+                        @if (Model.UserVbucks >= Model.Cosmetic.Price)
+                        {
+                            <form method="post" asp-page-handler="Purchase">
+                                <input type="hidden" name="cosmeticId" value="@Model.Cosmetic.Id" />
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-cart-plus"></i> Comprar Agora
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                <i class="bi bi-exclamation-triangle"></i> V-Bucks insuficientes. Você precisa de @(Model.Cosmetic.Price - Model.UserVbucks) V-Bucks a mais.
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <i class="bi bi-info-circle"></i>
+                        <a href="/Account/Login?returnUrl=/Cosmetics/Details/@Model.Cosmetic.Id" class="alert-link">Faça login</a> para comprar este cosmético.
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Cosmetic.ExternalId))
+                {
+                    <hr />
+                    <p class="text-muted small">
+                        <strong>ID Externo:</strong> @Model.Cosmetic.ExternalId
+                    </p>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i> Cosmético não encontrado.
+        </div>
+        <a href="/Cosmetics" class="btn btn-primary">Voltar para a lista</a>
+    }
+</div>

@@ -1,0 +1,182 @@
+@page
+@model CosmeticsIndexModel
+@{
+    ViewData["Title"] = "Cosméticos";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">
+        <i class="bi bi-bag"></i> Cosméticos do Fortnite
+    </h1>
+
+    <!-- Filtros -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" name="name" class="form-control" placeholder="Buscar..." value="@Model.Name" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Tipo</label>
+                    <select name="type" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="Outfit" selected="@(Model.Type == "Outfit")">Outfit</option>
+                        <option value="Glider" selected="@(Model.Type == "Glider")">Glider</option>
+                        <option value="Pickaxe" selected="@(Model.Type == "Pickaxe")">Pickaxe</option>
+                        <option value="Emote" selected="@(Model.Type == "Emote")">Emote</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Raridade</label>
+                    <select name="rarity" class="form-select">
+                        <option value="">Todas</option>
+                        <option value="Common" selected="@(Model.Rarity == "Common")">Common</option>
+                        <option value="Uncommon" selected="@(Model.Rarity == "Uncommon")">Uncommon</option>
+                        <option value="Rare" selected="@(Model.Rarity == "Rare")">Rare</option>
+                        <option value="Epic" selected="@(Model.Rarity == "Epic")">Epic</option>
+                        <option value="Legendary" selected="@(Model.Rarity == "Legendary")">Legendary</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Status</label>
+                    <select name="isForSale" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="true" selected="@(Model.IsForSale == true)">À venda</option>
+                        <option value="false" selected="@(Model.IsForSale == false)">Indisponível</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Novos</label>
+                    <div class="form-check mt-2">
+                        <input type="checkbox" name="isNew" value="true" class="form-check-input" @(Model.IsNew ? "checked" : "") />
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Filtrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Cosmetics != null && Model.Cosmetics.Items.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
+            @foreach (var cosmetic in Model.Cosmetics.Items)
+            {
+                <div class="col">
+                    <div class="card cosmetic-card rarity-@cosmetic.Rarity.ToLower()">
+                        @if (!string.IsNullOrEmpty(cosmetic.ImageUrl))
+                        {
+                            <img src="@cosmetic.ImageUrl" class="card-img-top cosmetic-image" alt="@cosmetic.Name" />
+                        }
+                        else
+                        {
+                            <div class="cosmetic-image bg-secondary d-flex align-items-center justify-content-center">
+                                <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <h6 class="card-title">@cosmetic.Name</h6>
+                            <p class="card-text small text-muted mb-2">
+                                <span class="badge bg-secondary">@cosmetic.Type</span>
+                                <span class="badge bg-info">@cosmetic.Rarity</span>
+                            </p>
+                            @if (cosmetic.IsNew)
+                            {
+                                <span class="badge bg-success mb-2"><i class="bi bi-star"></i> Novo</span>
+                            }
+
+                            <p class="mb-2">
+                                <strong class="@(cosmetic.IsForSale ? "text-success" : "text-muted")">
+                                    <i class="bi bi-currency-dollar"></i> @cosmetic.Price V-Bucks
+                                </strong>
+                                @if (!cosmetic.IsForSale)
+                                {
+                                    <br /><small class="text-muted">(Não disponível)</small>
+                                }
+                            </p>
+
+                            <a href="/Cosmetics/Details/@cosmetic.Id" class="btn btn-sm btn-outline-primary w-100">
+                                <i class="bi bi-eye"></i> Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Paginação -->
+        <nav>
+            <ul class="pagination justify-content-center">
+                @{
+                    var queryParams = new List<string>();
+                    if (!string.IsNullOrEmpty(Model.Name)) queryParams.Add($"name={Uri.EscapeDataString(Model.Name)}");
+                    if (!string.IsNullOrEmpty(Model.Type)) queryParams.Add($"type={Uri.EscapeDataString(Model.Type)}");
+                    if (!string.IsNullOrEmpty(Model.Rarity)) queryParams.Add($"rarity={Uri.EscapeDataString(Model.Rarity)}");
+                    if (Model.IsForSale.HasValue) queryParams.Add($"isForSale={Model.IsForSale.Value}");
+                    if (Model.IsNew) queryParams.Add("isNew=true");
+                    var queryString = queryParams.Count > 0 ? "&" + string.Join("&", queryParams) : "";
+                }
+
+                @if (Model.Cosmetics.Page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@(Model.Cosmetics.Page - 1)@queryString">
+                            <i class="bi bi-chevron-left"></i> Anterior
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link"><i class="bi bi-chevron-left"></i> Anterior</span>
+                    </li>
+                }
+
+                @for (int i = Math.Max(1, Model.Cosmetics.Page - 2); i <= Math.Min(Model.Cosmetics.TotalPages, Model.Cosmetics.Page + 2); i++)
+                {
+                    if (i == Model.Cosmetics.Page)
+                    {
+                        <li class="page-item active">
+                            <span class="page-link">@i</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="?page=@i@queryString">@i</a>
+                        </li>
+                    }
+                }
+
+                @if (Model.Cosmetics.Page < Model.Cosmetics.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@(Model.Cosmetics.Page + 1)@queryString">
+                            Próxima <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">Próxima <i class="bi bi-chevron-right"></i></span>
+                    </li>
+                }
+            </ul>
+
+            <div class="text-center text-muted small mt-2">
+                Mostrando @((Model.Cosmetics.Page - 1) * Model.Cosmetics.PageSize + 1) - @Math.Min(Model.Cosmetics.Page * Model.Cosmetics.PageSize, Model.Cosmetics.TotalCount) de @Model.Cosmetics.TotalCount cosméticos
+            </div>
+        </nav>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> Nenhum cosmético encontrado com os filtros aplicados.
+        </div>
+    }
+</div>
