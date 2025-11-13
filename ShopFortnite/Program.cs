@@ -55,9 +55,16 @@ builder.Services.AddHttpClient("FortniteApi", client =>
 });
 
 // HttpClient for internal API (Razor Pages)
+// builder.Services.AddHttpClient("ApiClient", client =>
+// {
+//     client.BaseAddress = new Uri("http://192.168.100.9:5106/");
+//     client.DefaultRequestHeaders.Add("Accept", "application/json");
+// });
+
 builder.Services.AddHttpClient("ApiClient", client =>
 {
-    client.BaseAddress = new Uri("http://192.168.100.9:5106/");
+    var baseUrl = builder.Configuration["AppBaseUrl"] ?? "http://localhost:5106";
+    client.BaseAddress = new Uri(baseUrl);
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
