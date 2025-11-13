@@ -589,3 +589,11 @@ footer a:hover {
   color: #000000 !important;
   opacity: 0.8;
 }
+
+.switch-row-newItens {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+}
