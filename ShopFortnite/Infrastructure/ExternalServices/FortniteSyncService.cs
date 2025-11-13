@@ -29,7 +29,7 @@ public class FortniteSyncService : BackgroundService
     {
         try
         {
-            _logger.LogInformation("FortniteSyncService iniciado");
+            _logger.LogWarning("FortniteSyncService iniciado");
 
             // Executa imediatamente na inicialização
             await SyncFortniteDataAsync(stoppingToken);
@@ -65,7 +65,7 @@ public class FortniteSyncService : BackgroundService
 
     private async Task SyncFortniteDataAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Iniciando sincronização com API Fortnite");
+        _logger.LogWarning("Iniciando sincronização com API Fortnite");
 
         try
         {
@@ -75,19 +75,16 @@ public class FortniteSyncService : BackgroundService
             // Sync all cosmetics
             await SyncAllCosmeticsAsync(unitOfWork, cancellationToken);
             await unitOfWork.SaveChangesAsync();
-            _logger.LogInformation("Todos os cosméticos sincronizados");
 
             // Sync new cosmetics
             await SyncNewCosmeticsAsync(unitOfWork, cancellationToken);
             await unitOfWork.SaveChangesAsync();
-            _logger.LogInformation("Novos cosméticos sincronizados");
 
             // Sync shop
             await SyncShopAsync(unitOfWork, cancellationToken);
             await unitOfWork.SaveChangesAsync();
-            _logger.LogInformation("Loja sincronizada");
 
-            _logger.LogInformation("Sincronização concluída com sucesso");
+            _logger.LogWarning("Sincronização concluída com sucesso");
         }
         catch (Exception ex)
         {
@@ -115,7 +112,6 @@ public class FortniteSyncService : BackgroundService
                     .ToList();
 
                 await unitOfWork.Cosmetics.CreateOrUpdateManyAsync(cosmetics);
-                _logger.LogInformation($"Sincronizados {cosmetics.Count} cosméticos");
             }
         }
         catch (Exception ex)
@@ -155,7 +151,6 @@ public class FortniteSyncService : BackgroundService
                     }).ToList();
 
                 await unitOfWork.Cosmetics.CreateOrUpdateManyAsync(newCosmetics);
-                _logger.LogInformation($"Marcados {newCosmetics.Count} cosméticos como novos");
             }
         }
         catch (Exception ex)
@@ -168,7 +163,6 @@ public class FortniteSyncService : BackgroundService
     {
         try
         {
-            _logger.LogInformation("Iniciando sincronização da loja do Fortnite");
             var response = await _httpClient.GetAsync($"{BaseUrl}/shop", cancellationToken);
             response.EnsureSuccessStatusCode();
 
@@ -177,8 +171,6 @@ public class FortniteSyncService : BackgroundService
 
             if (apiResponse?.Data?.Entries != null)
             {
-                _logger.LogInformation($"API retornou {apiResponse.Data.Entries.Count} entries da loja");
-
                 // Mark all as not for sale
                 var allCosmetics = await unitOfWork.Cosmetics.GetAllAsync();
                 foreach (var cosmetic in allCosmetics)
@@ -205,8 +197,6 @@ public class FortniteSyncService : BackgroundService
                     }
                 }
 
-                _logger.LogInformation($"Processados {itemCount} itens da loja");
-
                 // Remove duplicatas pelo ExternalId antes de salvar
                 var uniqueShopCosmetics = shopCosmetics
                     .GroupBy(c => c.ExternalId)
@@ -214,7 +204,6 @@ public class FortniteSyncService : BackgroundService
                     .ToList();
 
                 await unitOfWork.Cosmetics.CreateOrUpdateManyAsync(uniqueShopCosmetics);
-                _logger.LogInformation($"Sincronizados {uniqueShopCosmetics.Count} itens únicos da loja");
             }
         }
         catch (Exception ex)
