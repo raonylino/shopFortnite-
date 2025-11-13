@@ -177,11 +177,12 @@ var app = builder.Build();
 
 // Garante que o diretório do banco existe (Railway com volume)
 var dbPath = "/app/data";
+var startupLoggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+var startupLogger = startupLoggerFactory.CreateLogger<Program>();
+
 if (Directory.Exists(dbPath))
 {
-    var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
-    var logger = loggerFactory.CreateLogger<Program>();
-    logger.LogWarning($"Diretório do banco encontrado: {dbPath}");
+    startupLogger.LogWarning($"Diretório do banco encontrado: {dbPath}");
 }
 else if (!app.Environment.IsDevelopment())
 {
@@ -189,15 +190,11 @@ else if (!app.Environment.IsDevelopment())
     try
     {
         Directory.CreateDirectory(dbPath);
-        var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger<Program>();
-        logger.LogWarning($"Diretório do banco criado: {dbPath}");
+        startupLogger.LogWarning($"Diretório do banco criado: {dbPath}");
     }
     catch (Exception ex)
     {
-        var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger<Program>();
-        logger.LogError(ex, $"ERRO ao criar diretório {dbPath}");
+        startupLogger.LogError(ex, $"ERRO ao criar diretório {dbPath}");
     }
 }
 
