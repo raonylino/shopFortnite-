@@ -29,9 +29,12 @@ public class FortniteSyncService : BackgroundService
     {
         try
         {
-            _logger.LogWarning("FortniteSyncService iniciado");
+            _logger.LogWarning("FortniteSyncService iniciado - aguardando 30s para primeiro sync");
 
-            // Executa imediatamente na inicialização
+            // Aguarda 30 segundos para garantir que a aplicação está completamente inicializada
+            await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
+
+            // Executa primeira sincronização
             await SyncFortniteDataAsync(stoppingToken);
 
             while (!stoppingToken.IsCancellationRequested)
