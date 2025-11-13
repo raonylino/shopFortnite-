@@ -1,0 +1,10 @@
+# Ignora arquivos desnecessários no deploy do Railway
+bin/
+obj/
+*.db
+*.db-shm
+*.db-wal
+.vs/
+.vscode/
+*.user
+TestResults/

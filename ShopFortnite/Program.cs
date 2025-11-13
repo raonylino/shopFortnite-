@@ -13,8 +13,9 @@ using ShopFortnite.Infrastructure.ExternalServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Kestrel to listen on specific IP
-builder.WebHost.UseUrls("http://192.168.100.9:5106");
+// Configure Kestrel to listen on all interfaces and Railway's PORT
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5106";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -63,8 +64,18 @@ builder.Services.AddHttpClient("FortniteApi", client =>
 
 builder.Services.AddHttpClient("ApiClient", client =>
 {
-    var baseUrl = builder.Configuration["AppBaseUrl"] ?? "http://localhost:5106";
-    client.BaseAddress = new Uri(baseUrl);
+    // Railway fornece a URL pública via variável de ambiente
+    var baseUrl = Environment.GetEnvironmentVariable("RAILWAY_PUBLIC_DOMAIN");
+    if (!string.IsNullOrEmpty(baseUrl))
+    {
+        client.BaseAddress = new Uri($"https://{baseUrl}");
+    }
+    else
+    {
+        // Fallback para configuração local
+        baseUrl = builder.Configuration["AppBaseUrl"] ?? "http://localhost:5106";
+        client.BaseAddress = new Uri(baseUrl);
+    }
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
