@@ -562,20 +562,195 @@ footer a:hover {
 
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
+
+  /* Hero Section Mobile */
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    letter-spacing: 1px;
   }
 
+  .hero-section {
+    padding: 2rem 1rem;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+  }
+
+  /* Navbar Mobile */
   .navbar-brand {
-    font-size: 1.5rem !important;
+    font-size: 1.3rem !important;
+  }
+
+  .navbar-brand img {
+    height: 30px !important;
   }
 
   .nav-link {
     font-size: 1rem !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0.25rem 0;
+  }
+
+  /* Botões Mobile */
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  /* Cards Mobile */
+  .cosmetic-image {
+    height: 200px;
+  }
+
+  .cosmetic-card {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  /* Formulários Mobile */
+  .form-control,
+  .form-select {
+    font-size: 1rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .form-label {
+    font-size: 0.9rem;
+  }
+
+  /* Container Mobile */
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Paginação Mobile */
+  .page-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  /* Footer Mobile */
+  footer {
+    padding: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  /* Badge Mobile */
+  .vbucks-badge {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Grid de cosméticos mobile - 2 colunas */
+  .row-cols-1 {
+    row-gap: 1rem;
+  }
+
+  /* Tabelas Mobile - scroll horizontal */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Alertas Mobile */
+  .alert {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  /* Switch Mobile */
+  .switch-row-newItens {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Margem inferior para evitar footer */
+  main {
+    padding-bottom: 10rem !important;
+  }
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .cosmetic-image {
+    height: 220px;
+  }
+
+  .navbar-brand {
+    font-size: 1.7rem !important;
+  }
+}
+
+/* Mobile Pequeno (até 480px) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem !important;
   }
 
   .cosmetic-image {
     height: 180px;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 0.9rem;
+  }
+
+  /* Grid de cosméticos mobile pequeno - 1 coluna */
+  .row-cols-md-3,
+  .row-cols-lg-4 {
+    row-gap: 1rem;
+  }
+
+  /* Paginação mobile pequeno */
+  .pagination {
+    gap: 0.25rem;
+  }
+
+  .page-link {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  /* Footer mobile pequeno */
+  footer {
+    padding: 1rem 0;
+    font-size: 0.8rem;
+  }
+
+  main {
+    padding-bottom: 12rem !important;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .cosmetic-image {
+    height: 150px;
+  }
+
+  main {
+    padding-bottom: 8rem !important;
   }
 }
 

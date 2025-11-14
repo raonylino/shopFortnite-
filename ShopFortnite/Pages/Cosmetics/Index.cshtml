@@ -13,11 +13,11 @@
     <div class="card mb-4">
         <div class="card-body">
             <form method="get" class="row g-3">
-                <div class="col-md-4">
+                <div class="col-12 col-md-4">
                     <label class="form-label">Nome</label>
                     <input type="text" name="name" class="form-control" placeholder="Buscar..." value="@Model.Name" />
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label">Tipo</label>
                     <select name="type" class="form-select">
                         <option value="">Todos</option>
@@ -27,7 +27,7 @@
                         <option value="Emote" selected="@(Model.Type == "Emote")">Emote</option>
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label">Raridade</label>
                     <select name="rarity" class="form-select">
                         <option value="">Todas</option>
@@ -38,7 +38,7 @@
                         <option value="Legendary" selected="@(Model.Rarity == "Legendary")">Legendary</option>
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label">Status</label>
                     <select name="isForSale" class="form-select">
                         <option value="">Todos</option>
@@ -47,14 +47,14 @@
                     </select>
                 </div>
 
-                <div class="col-md-2 d-flex align-items-center flex-column">
+                <div class="col-6 col-md-2 d-flex align-items-center flex-column">
                  <div class="form-check form-switch mt-2">
                      <label class="form-label" for="switchNovos">
-                            Itens Novos
+                            <i class="bi bi-star-fill text-warning"></i> Novos
                         </label>
                         <input type="checkbox" name="isNew" value="true" class="form-check-input" id="switchNovos" @(Model.IsNew ? "checked" : "") />
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">
+                    <button type="submit" class="btn btn-primary w-100 mt-2">
                         <i class="bi bi-search"></i> Filtrar
                     </button>
                 </div>
@@ -64,7 +64,7 @@
 
     @if (Model.Cosmetics != null && Model.Cosmetics.Items.Any())
     {
-        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4 mb-4">
             @foreach (var cosmetic in Model.Cosmetics.Items)
             {
                 <div class="col">
